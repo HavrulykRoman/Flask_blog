@@ -31,10 +31,18 @@ def register():
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route('/login')
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'test@email.com' and form.password.data == '12345':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
+
 
 if __name__ == '__main__':
     app.run(port=8888)
