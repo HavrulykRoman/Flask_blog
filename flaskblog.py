@@ -31,6 +31,7 @@ def register():
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -40,8 +41,8 @@ def login():
             return redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-
     return render_template('login.html', title='Login', form=form)
+
 
 if __name__ == '__main__':
     app.run(port=8888)
